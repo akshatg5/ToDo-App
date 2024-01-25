@@ -1,17 +1,15 @@
-// Using Zod to do input validation, basically ensuring that the infromation use is sending is useful and suitable according to the file
+const zod = require("zod");
 
-const zod = require('zod')
-
-const createTodo =  zod.object({
-    title : z.string,
-    description : z.string
+const createTodo = zod.object({
+    title: zod.string(),
+    description: zod.string()
 })
 
 const updateTodo = zod.object({
-    id : string
+    id: zod.string(),
 })
 
 module.exports = {
-    createTodo : createTodo,
-    updateTodo : updateTodo
+    createTodo: createTodo,
+    updateTodo: updateTodo
 }
