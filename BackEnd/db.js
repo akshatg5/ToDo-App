@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 
 // connecting to Mongo DB
-mongoose.connect('')
+mongoose.connect('MongoDbConnectionString')
 
 //Defining Mongo DB schemas
 
