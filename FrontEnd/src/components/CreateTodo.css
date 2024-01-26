@@ -1,0 +1,15 @@
+.Parent-div input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2%;
+    margin: 1%;
+}
+
+.Parent-div button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    margin: 1%;
+}
