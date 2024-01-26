@@ -1,69 +1,60 @@
-import React, { useState, useEffect } from "react";
-import "./CreateTodo.css";
+const express = require("express");
+const { createTodo, updateTodo } = require("./types");
+const { todo } = require("./db");
+const cors = require("cors");
+const app = express();
 
-export function CreateTodo() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [todos, setTodos] = useState([]);
+app.use(express.json());
+app.use(cors());
 
-  // useEffect to fetch todos from the backend only once when the component mounts
-  useEffect(() => {
-    // Fetch todos from the backend
-    fetch("http://localhost:3000/todos")
-      .then((res) => res.json())
-      .then((data) => setTodos(data))
-      .catch((error) => console.error("Error fetching todos:", error));
-  }, []); // Will run the effect only once when the component mounts
+app.post("/create", async function(req, res) {
+    const createPayload = req.body;
+    const parsedPayload = createTodo.safeParse(createPayload);
 
-  const handleAddTodo = () => {
-    if (title && description) {
-      // Add a new todo locally without making a request to the backend
-      const newTodo = {
-        title: title,
-        description: description,
-        completed: false, // Assuming todos start as incomplete
-      };
-
-      setTodos((prevTodos) => [...prevTodos, newTodo]);
-
-      // Add a new todo to the backend
-      fetch("http://localhost:3000/create", {
-        method: "POST",
-        body: JSON.stringify(newTodo),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then(async (res) => {
-          const json = await res.json();
-          alert("Todo Added");
-          setTitle(""); // Clear the input fields after adding todo
-          setDescription("");
+    if (!parsedPayload.success) {
+        res.status(411).json({
+            msg: "You sent the wrong inputs",
         })
-        .catch((error) => {
-          console.error("Error adding todo:", error);
-        });
-    } else {
-      alert("Please enter both title and description");
+        return;
     }
-  };
+    await todo.create({
+        title: createPayload.title,
+        description: createPayload.description,
+        done: false
+    })
 
-  return (
-    <div className="Parent-div">
-      <input
-        type="text"
-        placeholder="title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <br />
-      <input
-        type="text"
-        placeholder="description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <button onClick={handleAddTodo}>Add a Todo</button>
-    </div>
-  );
-}
+    res.json({
+        msg: "Todo created"
+    })
+})
+
+app.get("/todos", async function(req, res) {
+  const todos = await todo.find({});
+    res.json({
+        todos
+    })
+
+})
+
+app.put("/done", async function(req, res) {
+    const updatePayload = req.body;
+    const parsedPayload = updateTodo.safeParse(updatePayload);
+    if (!parsedPayload.success) {
+        res.status(411).json({
+            msg: "You sent the wrong inputs",
+        })
+        return;
+    }
+
+    await todo.updateOne({
+        _id: req.body.id
+    }, {
+      done: true  
+    })
+
+    res.json({
+        msg: "Todo marked as completed"
+    })
+})
+
+app.listen(3000);
