@@ -49,7 +49,7 @@ app.put("/done", async function(req, res) {
     await todo.updateOne({
         _id: req.body.id
     }, {
-      done: true  
+      done: !req.body.done
     })
 
     res.json({
