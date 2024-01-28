@@ -1,8 +1,16 @@
-// another component that renders all the todos
+// Todos.jsx
 import React from "react";
 import "./Todos.css";
 
 export function Todos({ todos }) {
+  if (!Array.isArray(todos)) {
+    return <div>
+    <h1>
+    No todos available
+    </h1>
+    </div>;
+  }
+
   const handleCompleteTodo = (todo) => {
     fetch(`http://localhost:3000/done`, {
       method: "PUT",
@@ -27,7 +35,7 @@ export function Todos({ todos }) {
     <div>
       {todos.map((todo) => {
         return (
-          <div className="todos" key={todo.id}>
+          <div className="todos" key={todo._id}>
             <h1>{todo.title}</h1>
             <h2>{todo.description}</h2>
             <button onClick={() => handleCompleteTodo(todo)}>
