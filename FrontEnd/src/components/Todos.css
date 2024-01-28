@@ -1,7 +1,28 @@
 .todos {
-    color: white;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
 }
 
-h1,h2 {
-    color: white;
+.card-wrapper {
+    background-color: #000000;
+    flex: 1 0 calc(25% - 1rem);
+    border: solid 0.2rem #F0EDCF;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.card-wrapper h1 {
+    color: #40A2D8;
+}
+
+.card-wrapper h2 {
+    color: #40A2D8;
+}
+
+.card-wrapper button {
+    padding: 0.8rem;
+    border: none;
+    cursor: pointer;
+    background-color: #F0EDCF;
 }

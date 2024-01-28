@@ -4,11 +4,11 @@ import "./Todos.css";
 
 export function Todos({ todos }) {
   if (!Array.isArray(todos)) {
-    return <div>
-    <h1>
-    No todos available
-    </h1>
-    </div>;
+    return (
+      <div>
+        <h1>No todos available</h1>
+      </div>
+    );
   }
 
   const handleCompleteTodo = (todo) => {
@@ -33,17 +33,21 @@ export function Todos({ todos }) {
 
   return (
     <div>
-      {todos.map((todo) => {
-        return (
-          <div className="todos" key={todo._id}>
-            <h1>{todo.title}</h1>
-            <h2>{todo.description}</h2>
-            <button onClick={() => handleCompleteTodo(todo)}>
-              {todo.done ? "Completed!!" : "Complete"}
-            </button>
-          </div>
-        );
-      })}
+      <div className="todos" >
+        {todos.map((todo) => {
+          return (
+            <div className="card-wrapper" key={todo._id}>
+              <h1 className="todo-title">{todo.title}</h1>
+              <h2 className="todo-description">{todo.description}</h2>
+              <button
+                className="todo-btn"
+                onClick={() => handleCompleteTodo(todo)}>
+                {todo.done ? "Completed!!" : "Complete"}
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
