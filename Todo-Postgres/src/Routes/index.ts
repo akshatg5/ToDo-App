@@ -1,7 +1,10 @@
 import {Request,Response,Router} from 'express'
 const router = Router()
-const userRouter = require('./user')
+import userRouter from './user';
+import todoRouter from './todos';
 
 router.use("/user",userRouter)
+router.use("/todos",todoRouter)
 
-export default router;
+const appRouter = router;
+export default appRouter;
