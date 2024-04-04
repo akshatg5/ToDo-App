@@ -29,7 +29,7 @@ model Todo {
   description String?
   done        Boolean @default(false)
   createdAt   DateTime @default(now())
-  dueDate     DateTime?
+  dueDate     DateTime? @default(now())
   priority    String  @default("low")
   userId      Int
   user        User  @relation(fields: [userId],references: [id])

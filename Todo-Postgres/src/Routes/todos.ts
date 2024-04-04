@@ -99,6 +99,7 @@ router.get("/allTodos", authMiddleware, async (req: Request, res: Response) => {
         description: true,
         dueDate: true,
         priority: true,
+        done : true
       },
     });
 

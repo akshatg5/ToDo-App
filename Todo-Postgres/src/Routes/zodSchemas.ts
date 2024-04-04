@@ -9,34 +9,41 @@ const signupSchema = z.object({
 });
 
 const signinSchema = z.object({
-    username : z.string(),
-    password : z.string()
-})
+  username: z.string(),
+  password: z.string(),
+});
 
 const editDetailsSchema = z.object({
-    username : z.string().optional(),
-    email: z.string().email().optional(),
-    firstName: z.string().optional(),
-    lastName: z.string().optional(),
-})
+  username: z.string().optional(),
+  email: z.string().email().optional(),
+  firstName: z.string().optional(),
+  lastName: z.string().optional(),
+});
 
 const passwordChangeSchema = z.object({
-    currentPassword : z.string(),
-    newPassword : z.string()
-})
+  currentPassword: z.string(),
+  newPassword: z.string(),
+});
 
 const addTodoSchema = z.object({
-    title : z.string(),
-    description : z.string().optional(),
-    dueDate : z.date().optional(),
-    priority : z.enum(["low","medium","high"]).optional()
-})
+  title: z.string(),
+  description: z.string().optional(),
+  dueDate: z.date().optional(),
+  priority: z.enum(["low", "medium", "high"]).optional(),
+});
 
 const editTodoSchema = z.object({
-    title : z.string().optional(),
-    description : z.string().optional(),
-    dueDate : z.date().optional(),
-    priority : z.enum(["low","medium","high"]).optional()
-})
+  title: z.string().optional(),
+  description: z.string().optional(),
+  dueDate: z.date().optional(),
+  priority: z.enum(["low", "medium", "high"]).optional(),
+});
 
-export {signinSchema,signupSchema,editDetailsSchema,passwordChangeSchema,addTodoSchema,editTodoSchema}
+export {
+  signinSchema,
+  signupSchema,
+  editDetailsSchema,
+  passwordChangeSchema,
+  addTodoSchema,
+  editTodoSchema,
+};
