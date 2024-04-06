@@ -1,20 +1,20 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { InputBox } from "../Components/InputBox";
 import { Heading } from "../Components/Heading";
 import { MainButton } from "../Components/MainButtons";
 import { useNavigate } from "react-router-dom";
 
 interface FormData {
-  username : string;
-  email : string;
-  password : string;
-  firstName : string;
-  lastName : string
+  username: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
 }
 
 export const SignUpPage = () => {
-  const [error,setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<FormData>({
     username: "",
@@ -41,14 +41,19 @@ export const SignUpPage = () => {
       );
 
       if (response.status === 200) {
+        const { token } = response.data;
+        localStorage.setItem(
+          `security-token`,
+          token
+        );
         navigate("/dashboard");
       } else {
         console.error("Signup Failed");
-        setError("Signup Failed! Try again.")
+        setError("Signup Failed! Try again.");
       }
     } catch (error) {
       console.error("Error : error");
-      setError("Signup Failed! Try again.")
+      setError("Signup Failed! Try again.");
     }
   };
 
@@ -61,6 +66,7 @@ export const SignUpPage = () => {
         <InputBox
           placeholder="Enter your Username here!"
           name="username"
+          type="text"
           value={formData.username}
           onChange={handleChange}
           icon={
@@ -84,6 +90,7 @@ export const SignUpPage = () => {
         <InputBox
           placeholder="Enter your email here!"
           name="email"
+          type="email"
           value={formData.email}
           onChange={handleChange}
           icon={
@@ -107,6 +114,7 @@ export const SignUpPage = () => {
         <InputBox
           placeholder="Enter your password here!"
           name="password"
+          type="password"
           value={formData.password}
           onChange={handleChange}
           icon={
@@ -129,6 +137,7 @@ export const SignUpPage = () => {
         <InputBox
           placeholder="Enter your First name here!"
           name="firstName"
+          type="text"
           value={formData.firstName}
           onChange={handleChange}
           icon={
@@ -151,6 +160,7 @@ export const SignUpPage = () => {
         <InputBox
           placeholder="Enter your last name here!"
           name="lastName"
+          type="text"
           value={formData.lastName}
           onChange={handleChange}
           icon={

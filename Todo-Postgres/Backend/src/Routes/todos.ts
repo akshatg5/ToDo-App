@@ -95,6 +95,7 @@ router.get("/allTodos", authMiddleware, async (req: Request, res: Response) => {
     const todos = await prisma.todo.findMany({
       where: { userId },
       select: {
+        id : true,
         title: true,
         description: true,
         dueDate: true,

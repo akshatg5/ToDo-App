@@ -5,10 +5,11 @@ interface InputBoxProps {
   icon : JSX.Element,
   value : string,
   onChange : (event : React.ChangeEvent<HTMLInputElement>) => void,
-  name : string
+  name : string,
+  type : string
 }
 
-export const InputBox: React.FC<InputBoxProps> = ({ placeholder,icon,value,onChange,name}) => {
+export const InputBox: React.FC<InputBoxProps> = ({ placeholder,icon,value,onChange,name,type}) => {
   return (
     <div className="flex align-middle items-center">
       <div className="mx-2">
@@ -20,6 +21,7 @@ export const InputBox: React.FC<InputBoxProps> = ({ placeholder,icon,value,onCha
         value={value}
         onChange={onChange}
         name={name}
+        type={type}
       ></input>
     </div>
   );

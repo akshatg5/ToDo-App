@@ -28,14 +28,14 @@ const passwordChangeSchema = z.object({
 const addTodoSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
-  dueDate: z.date().optional(),
+  dueDate: z.string().optional(),
   priority: z.enum(["low", "medium", "high"]).optional(),
 });
 
 const editTodoSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
-  dueDate: z.date().optional(),
+  dueDate: z.string().optional(),
   priority: z.enum(["low", "medium", "high"]).optional(),
 });
 

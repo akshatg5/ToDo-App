@@ -75,18 +75,44 @@ router.post("/signin", async (req: Request, res: Response) => {
     const token = jwt.sign(
       { userId: user.id },
       process.env.JWT_SECRET as string,
-      { expiresIn: "2h" }
+      { expiresIn: process.env.ACCESS_TOKEN_EXPIRATION }
     );
+
+    // have to generate a refresh token too
+    const refreshToken = jwt.sign(
+      {userId : user.id},
+      process.env.REFRESH_TOKEN_SECRET as string,
+      {expiresIn : process.env.REFRESH_TOKEN_EXPIRATION }
+    )
 
     //if everything is correct then will return the user along with the message, user details and token
     return res
       .status(200)
-      .json({ message: "User signed in successfully", user, token });
+      .json({ message: "User signed in successfully", user, token,refreshToken });
   } catch (error) {
     console.error("Error signin", error);
     res.status(500).json({ message: "Signin Error" });
   }
 });
+
+router.post("/refresh-token",async (req:Request,res:Response) => {
+  try {
+    const refreshToken = req.body.refreshToken;
+    // first we have to verify the refresh token
+    const decoded = jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET as string) as {userId : string}
+
+    // use the refresh token to generate a new access token
+    const accessToken = jwt.sign(
+      {userId : decoded.userId},
+      process.env.JWT_SECRET as string,
+      {expiresIn : process.env.ACCESS_TOKEN_EXPIRATION}
+    )
+
+    res.status(200).json({accessToken})
+  } catch (error) {
+
+  }
+})
 
 router.put("/edit-details",authMiddleware,async (req:Request,res:Response) => {
     try {

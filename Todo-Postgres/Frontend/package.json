@@ -10,12 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/react-datepicker": "^6.2.0",
     "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "js-jwt": "^0.2.7",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "jwt-simple": "^0.5.6",
     "react": "^18.2.0",
+    "react-datepicker": "^6.6.0",
+    "react-datetime-picker": "^5.6.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
+    "@types/jwt-decode": "^3.1.0",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
