@@ -1,4 +1,5 @@
 import { InputBox } from "./InputBox";
+
 interface AddTodoFormProps {
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;

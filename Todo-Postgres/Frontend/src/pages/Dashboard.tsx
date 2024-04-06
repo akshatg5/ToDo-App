@@ -70,30 +70,7 @@ export const Dashboard = () => {
       setError("Error creating the todo!Try again");
     }
   };
-
-  const handleEditTodo = async (id : number) => {
-    try {
-      const token = localStorage.getItem("security-token")
-      const response = await axios.put(`http://localhost:3000/todoapi/v1/todos/todo/${id}`,
-        todoFormData,
-        {
-          headers : {
-            Authorization : `Bearer ${token}`
-          }
-        }
-      );
-
-      if (response.status === 200) {
-        console.log("Todo Updated",response.data)
-        setError("Todo Updated")
-      }
-    } catch (error) 
-    {
-      console.error("Update error",error)
-      setError("Error in updating the todo.")
-    }
-  }
-
+  
   const updateToken = (newToken: string) => {
     setToken(newToken);
   };
@@ -121,7 +98,7 @@ export const Dashboard = () => {
             />
           )}
         </div>
-          <TodosList todos={[]} onEditTodo={handleEditTodo} />
+          <TodosList/>
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import { Todocard, Priority } from "./TodoCard";
 
 import axios from "axios";
 
-interface Todo {
+export interface Todo {
   id: number;
   title: string;
   description: string;
@@ -12,15 +12,9 @@ interface Todo {
   done: boolean;
 }
 
-interface TodoListProps {
-  todos: Todo[];
-  onEditTodo: (id: number) => void;
-}
-
-export const TodosList: React.FC<TodoListProps> = ({ todos, onEditTodo }) => {
+export const TodosList = () => {
   const [error, setError] = useState<string | null>(null);
-  const [editingTodo,setEditingTodo] = useState<Todo | null>(null);
-  const [isEditing,setIsEditing] = useState(false);
+
   const [fetchedTodos, setFetchedTodos] = useState<Todo[]>([]); // Declare state variable for fetched todos
 
   useEffect(() => {
@@ -49,16 +43,12 @@ export const TodosList: React.FC<TodoListProps> = ({ todos, onEditTodo }) => {
       }
     };
     fetchTodos();
-  }, []);
+  }, [fetchedTodos]);
 
-  const handleEditClick = (todo : Todo) => {
-    setEditingTodo(null);
-    setIsEditing(true);
-  }
-
-  const handleCloseEdit = () => {
-    setEditingTodo(null);
-    setIsEditing(false)
+  const handleTodoStatusChange = (id : number,newStatus : boolean) => {
+    setFetchedTodos((prevTodos) => 
+      prevTodos.map((todo) => todo.id === id ? {...todo,done:newStatus} : todo)
+    )
   }
 
   return (
@@ -66,7 +56,7 @@ export const TodosList: React.FC<TodoListProps> = ({ todos, onEditTodo }) => {
       <div>
         {error && <h1 className="text-red-500">{error}</h1>}
       </div>
-      {fetchedTodos.map((todo) => (
+      {fetchedTodos.filter(todo => !todo.done).map((todo) => (
         <Todocard
           key={todo.id}
           todoTitle={todo.title}
@@ -74,8 +64,20 @@ export const TodosList: React.FC<TodoListProps> = ({ todos, onEditTodo }) => {
           dueDate={new Date(todo.dueDate)}
           priority={todo.priority}
           done={todo.done}
-          onEditTodo={() => onEditTodo(todo.id)} 
           id={todo.id}        
+          onTodoStatusChange={handleTodoStatusChange}
+        />
+      ))}
+      {fetchedTodos.filter(todo => todo.done).map((todo) => (
+        <Todocard
+          key={todo.id}
+          todoTitle={todo.title}
+          description={todo.description}
+          dueDate={new Date(todo.dueDate)}
+          priority={todo.priority}
+          done={todo.done}
+          id={todo.id}        
+          onTodoStatusChange={handleTodoStatusChange}
         />
       ))}
       <div>
