@@ -1,20 +1,10 @@
 {
     "version": 2,
     "builds": [
-      {
-        "src": "tsconfig.json",
-        "use": "@vercel/static-build"
-      },
-      {
-        "src": "dist/index.js",
-        "use": "@vercel/node"
-      }
+      { "src": "package.json", "use": "@vercel/node", "buildCommand": "npm run build" }
     ],
     "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/"
-      }
+      { "src": "/(.*)", "dest": "dist/index.js" }
     ]
   }
   
