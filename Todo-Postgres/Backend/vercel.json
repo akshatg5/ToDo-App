@@ -1,6 +1,6 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/(.*)", "dest": "public/index.js" } 
+    { "src": "/(.*)", "dest": "dist/index.js" } 
   ]
 }
