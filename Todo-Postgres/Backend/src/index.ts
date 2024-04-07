@@ -21,5 +21,3 @@ app.use((err : Error, req : Request, res : Response, next: any) => {
 });
 
 app.listen(3000, () => console.log("Todo Server is running"));
-
-export default app;
