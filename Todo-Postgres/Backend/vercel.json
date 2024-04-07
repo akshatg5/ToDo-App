@@ -1,18 +1,24 @@
 {
   "version": 2,
   "builds": [
-    { "src": "src/**/*.ts", "use": "@vercel/node" }
+    {
+      "src": "src/**/*.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["src/**/*"],
+        "maxLambdaSize": "15mb"
+      }
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "" }
+    }
   ],
   "routes": [
     {
       "src": "/(.*)",
       "dest": "dist/index.js"
     }
-  ],
-  "functions": {
-    "preBuild": {
-      "command": "npm install && npm run build",
-      "includeFiles": ["src/**/*"]
-    }
-  }
+  ]
 }
