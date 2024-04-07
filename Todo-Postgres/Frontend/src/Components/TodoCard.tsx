@@ -35,7 +35,7 @@ export const Todocard: React.FC<TodoCardProps> = ({
       }
 
       const response = await axios.post(
-        `http://localhost:3000/todoapi/v1/todos/todoStatus/${id}`,
+        `https://to-do-app-two-iota.vercel.app/todoapi/v1/todos/todoStatus/${id}`,
         {},
         {
           headers: {
@@ -63,7 +63,7 @@ export const Todocard: React.FC<TodoCardProps> = ({
       }
 
       const response = await axios.delete(
-        `http://localhost:3000/todoapi/v1/todos/todo/${id}`,
+        `https://to-do-app-two-iota.vercel.app/todoapi/v1/todos/todo/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

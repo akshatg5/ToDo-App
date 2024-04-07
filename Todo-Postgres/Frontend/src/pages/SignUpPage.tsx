@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { InputBox } from "../Components/InputBox";
 import { Heading } from "../Components/Heading";
 import { MainButton } from "../Components/MainButtons";
@@ -36,7 +36,7 @@ export const SignUpPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/todoapi/v1/user/signup",
+        "https://to-do-app-two-iota.vercel.app/todoapi/v1/user/signup",
         formData
       );
 

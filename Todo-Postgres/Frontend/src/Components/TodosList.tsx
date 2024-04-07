@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import{ useEffect, useState } from "react";
 import { Todocard, Priority } from "./TodoCard";
 
 import axios from "axios";
@@ -27,7 +27,7 @@ export const TodosList = () => {
         }
 
         const response = await axios.get(
-          "http://localhost:3000/todoapi/v1/todos/allTodos",
+          "https://to-do-app-two-iota.vercel.app/todoapi/v1/todos/allTodos",
           {
             headers: {
               Authorization: `Bearer ${token}`,
