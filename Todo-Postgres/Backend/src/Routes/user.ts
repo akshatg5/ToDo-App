@@ -37,7 +37,7 @@ router.post("/signup", async (req: Request, res: Response) => {
     const token = jwt.sign(
       { userId: newUser.id },
       process.env.JWT_SECRET as string,
-      { expiresIn: "2h" }
+      { expiresIn: process.env.ACCESS_TOKEN_EXPIRATION }
     );
 
     res.status(200).json({
