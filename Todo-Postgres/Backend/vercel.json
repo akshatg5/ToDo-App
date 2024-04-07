@@ -1,15 +1,18 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
-    }
+    { "src": "src/**/*.ts", "use": "@vercel/node" }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "package.json"
+      "dest": "dist/index.js"
     }
-  ]
+  ],
+  "functions": {
+    "preBuild": {
+      "command": "npm install && npm run build",
+      "includeFiles": ["src/**/*"]
+    }
+  }
 }
