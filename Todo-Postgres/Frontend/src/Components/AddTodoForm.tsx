@@ -10,7 +10,6 @@ interface AddTodoFormProps {
       priority: string;
     };
     error: string | null;
-    updateToken: (newToken: string) => void;
   }
   
  export const AddTodoForm: React.FC<AddTodoFormProps> = ({
@@ -18,15 +17,8 @@ interface AddTodoFormProps {
     handleSubmit,
     todoFormData,
     error,
-    updateToken,
   }) => {
   
-    const handleToken = () => {
-      const newToken = localStorage.getItem("token");
-      if (newToken) {
-        updateToken(newToken);
-      }
-    };
   
     return (
       <div>
@@ -153,12 +145,6 @@ interface AddTodoFormProps {
             Add
           </button>
           {error && <p className="text-red-500 mt-2">{error}</p>}
-          <button
-            className="bg-slate-400 px-4 py-2 rounded-xl text-white mt-4"
-            onClick={handleToken}
-          >
-            Login
-          </button>
         </form>
       </div>
     );

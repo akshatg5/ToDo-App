@@ -16,7 +16,6 @@ export const Dashboard = () => {
   });
 
   // storing the JWT token in local storage for authentication
-  const [token, setToken] = useState<string | null>(null);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -70,10 +69,6 @@ export const Dashboard = () => {
       setError("Error creating the todo!Try again");
     }
   };
-  
-  const updateToken = (newToken: string) => {
-    setToken(newToken);
-  };
 
   return (
     <>
@@ -94,7 +89,6 @@ export const Dashboard = () => {
               handleSubmit={handleSubmit}
               todoFormData={todoFormData}
               error={error}
-              updateToken={updateToken}
             />
           )}
         </div>
